@@ -29,19 +29,18 @@ const db = mysql.createConnection({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
 
-  
+
   ssl: {
-    rejectUnauthorized: false,  
+    rejectUnauthorized: false,
   },
 });
 db.connect((err) => {
   if (err) {
-    console.error("❌ MySQL Connection Failed:", err.message);
+    console.error("❌ MySQL Connection Failed:", err);
     return;
   }
   console.log("✅ MySQL Connected Successfully");
 });
-
 // Multer storage
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
