@@ -8,7 +8,7 @@ const EventSection = () => {
   useEffect(() => {
     const fetchVenues = async () => {
       try {
-        const res = await fetch('http://https://festpro-yvwm.onrender.com/api/venues');
+        const res = await fetch('https://festpro-yvwm.onrender.com/api/venues');
         const data = await res.json();
         setUpcomingEvents(data);
       } catch (err) {

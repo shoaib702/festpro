@@ -29,7 +29,7 @@ const MyProfile = () => {
     try {
       setIsLoading(true);
       const userId = localStorage.getItem('user');
-      const response = await axios.get(`http://https://festpro-yvwm.onrender.com/api/users/${userId}`);
+      const response = await axios.get(`https://festpro-yvwm.onrender.com/api/users/${userId}`);
       setUser(response.data);
     } catch (error) {
       setError("Failed to fetch user data. Please try again.");
@@ -54,7 +54,7 @@ const MyProfile = () => {
     try {
       setIsLoading(true);
       const userId = localStorage.getItem('user');
-      await axios.put(`http://https://festpro-yvwm.onrender.com/api/users/${userId}`, user);
+      await axios.put(`https://festpro-yvwm.onrender.com/api/users/${userId}`, user);
       setSuccess("Profile updated successfully!");
       setIsEditing(false);
       fetchUserData();
@@ -77,7 +77,7 @@ const MyProfile = () => {
     try {
       setIsLoading(true);
       const userId = localStorage.getItem('user');
-      await axios.put(`http://https://festpro-yvwm.onrender.com/api/users/${userId}/password`, {
+      await axios.put(`https://festpro-yvwm.onrender.com/api/users/${userId}/password`, {
         oldPassword: passwordData.oldPassword,
         newPassword: passwordData.newPassword
       });

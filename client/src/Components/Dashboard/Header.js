@@ -16,7 +16,7 @@ const Header = () => {
         return;
       }
       try {
-        const res = await fetch(`http://https://festpro-yvwm.onrender.com/api/users/${userId}`);
+        const res = await fetch(`https://festpro-yvwm.onrender.com/api/users/${userId}`);
         if (res.ok) {
           const data = await res.json();
           setUser(data);

@@ -17,8 +17,8 @@ const VenuesAll = () => {
   const fetchVenues = async () => {
     try {
       const [venuesRes, categoriesRes] = await Promise.all([
-        axios.get(`http://https://festpro-yvwm.onrender.com/vendor/venues/${vendorId}`),
-        axios.get("http://https://festpro-yvwm.onrender.com/categories"),
+        axios.get(`https://festpro-yvwm.onrender.com/vendor/venues/${vendorId}`),
+        axios.get("https://festpro-yvwm.onrender.com/categories"),
       ]);
 
       const categoryMap = {};
@@ -82,7 +82,7 @@ const VenuesAll = () => {
                     {venue.photo && (
                       <div className="venue-image">
                         <img
-                          src={`http://https://festpro-yvwm.onrender.com/uploads/${venue.photo}`}
+                          src={`https://festpro-yvwm.onrender.com/uploads/${venue.photo}`}
                           alt={venue.name}
                         />
                       </div>

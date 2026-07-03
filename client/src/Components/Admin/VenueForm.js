@@ -51,7 +51,7 @@ const VenueForm = ({
   const fetchAdditionalPhotos = async (venueId) => {
     try {
       const response = await axios.get(
-        `http://https://festpro-yvwm.onrender.com/venue/${venueId}/additional-photos`
+        `https://festpro-yvwm.onrender.com/venue/${venueId}/additional-photos`
       );
       setExistingAdditionalPhotos(response.data);
     } catch (err) {
@@ -133,14 +133,14 @@ const VenueForm = ({
         // Update existing venue
         venueId = editingId;
         await axios.put(
-          `http://https://festpro-yvwm.onrender.com/vendor/venue/${editingId}`,
+          `https://festpro-yvwm.onrender.com/vendor/venue/${editingId}`,
           formData,
           { headers: { 'Content-Type': 'multipart/form-data' } }
         );
       } else {
         // Create new venue
         const response = await axios.post(
-          "http://https://festpro-yvwm.onrender.com/vendor/venue",
+          "https://festpro-yvwm.onrender.com/vendor/venue",
           formData,
           { headers: { 'Content-Type': 'multipart/form-data' } }
         );
@@ -153,7 +153,7 @@ const VenueForm = ({
         if (photosToDelete.length > 0) {
           await Promise.all(
             photosToDelete.map(photoId =>
-              axios.delete(`http://https://festpro-yvwm.onrender.com/venue/additional-photo/${photoId}`, {
+              axios.delete(`https://festpro-yvwm.onrender.com/venue/additional-photo/${photoId}`, {
                 data: { vendor_id: vendorId }
               })
             )
@@ -169,7 +169,7 @@ const VenueForm = ({
           additionalPhotosData.append("vendor_id", vendorId);
 
           await axios.post(
-            `http://https://festpro-yvwm.onrender.com/venue/${venueId}/additional-photos`,
+            `https://festpro-yvwm.onrender.com/venue/${venueId}/additional-photos`,
             additionalPhotosData,
             { headers: { 'Content-Type': 'multipart/form-data' } }
           );
@@ -324,7 +324,7 @@ const VenueForm = ({
                 <div className="current-photo-preview mt-2">
                   <p>Current Main Photo:</p>
                   <img
-                    src={`http://https://festpro-yvwm.onrender.com/uploads/${currentVenue.photo}`}
+                    src={`https://festpro-yvwm.onrender.com/uploads/${currentVenue.photo}`}
                     alt="Current venue"
                     className="img-thumbnail current-photo"
                   />
@@ -386,7 +386,7 @@ const VenueForm = ({
                     {existingAdditionalPhotos.map((photo) => (
                       <div key={photo.id} className="photo-preview-item">
                         <img
-                          src={`http://https://festpro-yvwm.onrender.com/uploads/${photo.image_path}`}
+                          src={`https://festpro-yvwm.onrender.com/uploads/${photo.image_path}`}
                           alt="Venue"
                           className="img-thumbnail photo-preview-img"
                         />

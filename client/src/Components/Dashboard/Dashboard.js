@@ -16,7 +16,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchVenues = async () => {
       try {
-        const response = await fetch('http://https://festpro-yvwm.onrender.com/api/venues');
+        const response = await fetch('https://festpro-yvwm.onrender.com/api/venues');
         const data = await response.json();
         setUpcomingEvents(data);
       } catch (error) {

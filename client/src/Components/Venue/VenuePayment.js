@@ -122,7 +122,7 @@ const Payment = () => {
         userId,
       });
 
-      const res = await axios.post('http://https://festpro-yvwm.onrender.com/api/payments', {
+      const res = await axios.post('https://festpro-yvwm.onrender.com/api/payments', {
         bookingId,
         amount: grandTotal,
         paymentDetails,

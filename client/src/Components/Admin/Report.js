@@ -25,7 +25,7 @@ const Report = () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `http://https://festpro-yvwm.onrender.com/api/vendors/${vendorId}/bookings-details`
+        `https://festpro-yvwm.onrender.com/api/vendors/${vendorId}/bookings-details`
       );
       setBookings(response.data.bookings);
       setFilteredBookings(response.data.bookings);

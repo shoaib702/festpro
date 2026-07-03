@@ -6,7 +6,7 @@ const EventCard = ({ event, isTrending = false }) => {
 
   const imageUrl = isTrending
     ? event.image
-    : `http://https://festpro-yvwm.onrender.com/uploads/${event.photo}`;
+    : `https://festpro-yvwm.onrender.com/uploads/${event.photo}`;
 
   const handleViewDetails = () => {
     navigate(`/venue/${event.id}`, { state: { event } });

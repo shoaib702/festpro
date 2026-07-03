@@ -27,8 +27,8 @@ const VendorDashboard = () => {
   const fetchVenues = async () => {
     try {
       const [venuesRes, categoriesRes] = await Promise.all([
-        axios.get(`http://https://festpro-yvwm.onrender.com/vendor/venues/${vendorId}`),
-        axios.get('http://https://festpro-yvwm.onrender.com/categories')
+        axios.get(`https://festpro-yvwm.onrender.com/vendor/venues/${vendorId}`),
+        axios.get('https://festpro-yvwm.onrender.com/categories')
       ]);
 
       const categoryMap = {};
@@ -59,7 +59,7 @@ const VendorDashboard = () => {
 
   const fetchCategories = async () => {
     try {
-      const res = await axios.get('http://https://festpro-yvwm.onrender.com/categories');
+      const res = await axios.get('https://festpro-yvwm.onrender.com/categories');
       setCategories(res.data);
     } catch (error) {
       console.error('Error fetching categories:', error);
@@ -68,7 +68,7 @@ const VendorDashboard = () => {
 
   const fetchBookings = async () => {
     try {
-      const res = await axios.get(`http://https://festpro-yvwm.onrender.com/api/vendors/${vendorId}/bookings`);
+      const res = await axios.get(`https://festpro-yvwm.onrender.com/api/vendors/${vendorId}/bookings`);
       setBookings(res.data);
     } catch (err) {
       console.error("Error fetching bookings:", err);

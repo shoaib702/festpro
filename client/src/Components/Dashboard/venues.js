@@ -18,7 +18,7 @@ const Venues = () => {
     const fetchVenues = async () => {
       try {
         setLoading(true);
-        let url = 'http://https://festpro-yvwm.onrender.com/api/venues';
+        let url = 'https://festpro-yvwm.onrender.com/api/venues';
 
         if (categoryId) {
           url += `?category=${categoryId}`;
@@ -58,7 +58,7 @@ const Venues = () => {
             <div key={venue.id} className="venue-card event-card">
               <div className="event-image-container">
                 <img
-                  src={`http://https://festpro-yvwm.onrender.com/uploads/${venue.photo}`}
+                  src={`https://festpro-yvwm.onrender.com/uploads/${venue.photo}`}
                   alt={venue.name}
                   className="event-image"
 

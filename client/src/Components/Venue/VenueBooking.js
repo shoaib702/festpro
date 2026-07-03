@@ -36,7 +36,7 @@ const VenueBooking = () => {
 
     const fetchUser = async () => {
       try {
-        const res = await fetch(`http://https://festpro-yvwm.onrender.com/api/users/${userId}`);
+        const res = await fetch(`https://festpro-yvwm.onrender.com/api/users/${userId}`);
         if (res.ok) {
           const data = await res.json();
           setUser(data);
@@ -69,7 +69,7 @@ const VenueBooking = () => {
       setErrors(prev => ({ ...prev, date: '' }));
 
       const res = await fetch(
-        `http://https://festpro-yvwm.onrender.com/api/venues/${state.event.id}/availability?date=${formData.date}`
+        `https://festpro-yvwm.onrender.com/api/venues/${state.event.id}/availability?date=${formData.date}`
       );
 
       if (res.ok) {
@@ -166,7 +166,7 @@ const VenueBooking = () => {
         message: formData.message,
       };
 
-      const response = await fetch('http://https://festpro-yvwm.onrender.com/api/bookings', {
+      const response = await fetch('https://festpro-yvwm.onrender.com/api/bookings', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

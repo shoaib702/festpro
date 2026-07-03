@@ -17,7 +17,7 @@ const VenuesList = ({ venues, handleEdit, fetchVenues }) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.delete(`http://https://festpro-yvwm.onrender.com/vendor/venue/${id}`, {
+          await axios.delete(`https://festpro-yvwm.onrender.com/vendor/venue/${id}`, {
             data: { vendor_id: vendorId },
           });
           fetchVenues();
@@ -55,7 +55,7 @@ const VenuesList = ({ venues, handleEdit, fetchVenues }) => {
                 {venue.photo && (
                   <div className="venue-image">
                     <img
-                      src={`http://https://festpro-yvwm.onrender.com/uploads/${venue.photo}`}
+                      src={`https://festpro-yvwm.onrender.com/uploads/${venue.photo}`}
                       alt={venue.name}
                     />
                   </div>

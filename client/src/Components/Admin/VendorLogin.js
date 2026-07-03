@@ -19,7 +19,7 @@ const VendorLogin = () => {
     setLoading(true);
 
     try {
-      const res = await axios.post('http://https://festpro-yvwm.onrender.com/vendor/login', form);
+      const res = await axios.post('https://festpro-yvwm.onrender.com/vendor/login', form);
       const { token, message, vendorId } = res.data;
 
       localStorage.setItem('vendorToken', token);

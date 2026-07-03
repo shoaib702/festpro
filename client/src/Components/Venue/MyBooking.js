@@ -22,7 +22,7 @@ const MyBookings = () => {
 
     const fetchBookings = async () => {
       try {
-        const res = await axios.get(`http://https://festpro-yvwm.onrender.com/api/bookings/user/${userId}`);
+        const res = await axios.get(`https://festpro-yvwm.onrender.com/api/bookings/user/${userId}`);
         setBookings(res.data);
 
         if (res.data.length === 0) {
@@ -115,7 +115,7 @@ const MyBookings = () => {
             <div key={booking.id} className="booking-card">
               {booking.venue_photo && (
                 <img
-                  src={`http://https://festpro-yvwm.onrender.com/uploads/${booking.venue_photo}`}
+                  src={`https://festpro-yvwm.onrender.com/uploads/${booking.venue_photo}`}
                   alt="Venue"
                   className="booking-image"
                 />

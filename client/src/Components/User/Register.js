@@ -20,7 +20,7 @@ const Register = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axios.post('http://https://festpro-yvwm.onrender.com/register', form);
+      const res = await axios.post('https://festpro-yvwm.onrender.com/register', form);
       alert(res.data.message);
       navigate('/login');
     } catch (err) {

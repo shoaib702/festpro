@@ -23,22 +23,22 @@ const VenueDetails = () => {
         setLoading(true);
 
         // Fetch venue details
-        const venueResponse = await axios.get(`http://https://festpro-yvwm.onrender.com/api/venues/${id}`);
+        const venueResponse = await axios.get(`https://festpro-yvwm.onrender.com/api/venues/${id}`);
         const venueData = venueResponse.data;
         setVenueDetails(venueData);
 
         // Fetch additional photos
-        const photosResponse = await axios.get(`http://https://festpro-yvwm.onrender.com/venue/${id}/additional-photos`);
+        const photosResponse = await axios.get(`https://festpro-yvwm.onrender.com/venue/${id}/additional-photos`);
         setAdditionalPhotos(photosResponse.data);
 
         // Fetch vendor name if vendor_id exists
         if (venueData.vendor_id) {
-          const vendorResponse = await axios.get(`http://https://festpro-yvwm.onrender.com/api/vendors/${venueData.vendor_id}`);
+          const vendorResponse = await axios.get(`https://festpro-yvwm.onrender.com/api/vendors/${venueData.vendor_id}`);
           setVendorName(vendorResponse.data.name);
         }
 
         // Fetch all categories
-        const categoriesResponse = await axios.get('http://https://festpro-yvwm.onrender.com/categories');
+        const categoriesResponse = await axios.get('https://festpro-yvwm.onrender.com/categories');
         setCategories(categoriesResponse.data);
 
         setLoading(false);
@@ -52,16 +52,16 @@ const VenueDetails = () => {
       // Use state if available
       setVenueDetails(state.event);
       if (state.event.vendor_id) {
-        axios.get(`http://https://festpro-yvwm.onrender.com/api/vendors/${state.event.vendor_id}`)
+        axios.get(`https://festpro-yvwm.onrender.com/api/vendors/${state.event.vendor_id}`)
           .then(res => setVendorName(res.data.name))
           .catch(err => console.error("Error fetching vendor:", err));
       }
-      axios.get('http://https://festpro-yvwm.onrender.com/categories')
+      axios.get('https://festpro-yvwm.onrender.com/categories')
         .then(res => setCategories(res.data))
         .catch(err => console.error("Error fetching categories:", err));
 
       // Fetch additional photos even when using state
-      axios.get(`http://https://festpro-yvwm.onrender.com/venue/${id}/additional-photos`)
+      axios.get(`https://festpro-yvwm.onrender.com/venue/${id}/additional-photos`)
         .then(res => setAdditionalPhotos(res.data))
         .catch(err => console.error("Error fetching additional photos:", err));
 
@@ -102,7 +102,7 @@ const VenueDetails = () => {
     category: 'N/A'
   };
 
-  const mainImageUrl = event.image || `http://https://festpro-yvwm.onrender.com/uploads/${event.photo}`;
+  const mainImageUrl = event.image || `https://festpro-yvwm.onrender.com/uploads/${event.photo}`;
   const price = `Rs ${event.rate || '0'}`;
   const title = event.title || event.name;
   const location = event.venue || event.location;
@@ -160,7 +160,7 @@ const VenueDetails = () => {
                       onClick={() => handleImageClick(photo)}
                     >
                       <img
-                        src={`http://https://festpro-yvwm.onrender.com/uploads/${photo.image_path}`}
+                        src={`https://festpro-yvwm.onrender.com/uploads/${photo.image_path}`}
                         alt={`Venue photo ${index + 1}`}
                         className="gallery-image"
                         onError={(e) => {
@@ -250,7 +250,7 @@ const VenueDetails = () => {
           <div className="modal-contents" onClick={e => e.stopPropagation()}>
             <span className="close-button" onClick={closeModal}>&times;</span>
             <img
-              src={`http://https://festpro-yvwm.onrender.com/uploads/${selectedImage.image_path}`}
+              src={`https://festpro-yvwm.onrender.com/uploads/${selectedImage.image_path}`}
               alt="Selected venue"
               className="modal-image"
               onError={(e) => {

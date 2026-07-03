@@ -11,7 +11,7 @@ const Categories = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get('http://https://festpro-yvwm.onrender.com/categories');
+        const response = await axios.get('https://festpro-yvwm.onrender.com/categories');
         setCategories(response.data);
         setLoading(false);
       } catch (err) {

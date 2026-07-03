@@ -25,7 +25,7 @@ const VendorRegister = () => {
     setLoading(true);
     try {
       const res = await axios.post(
-        "http://https://festpro-yvwm.onrender.com/vendor/register",
+        "https://festpro-yvwm.onrender.com/vendor/register",
         form
       );
       alert(res.data.message);
