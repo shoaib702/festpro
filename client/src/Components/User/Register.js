@@ -20,7 +20,7 @@ const Register = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:5000/register', form);
+      const res = await axios.post('http://https://festpro-yvwm.onrender.com/register', form);
       alert(res.data.message);
       navigate('/login');
     } catch (err) {
@@ -35,7 +35,7 @@ const Register = () => {
       <div className="auth-card">
         <h2 className="auth-title">Register</h2>
         {error && <div className="auth-error">{error}</div>}
-        
+
         <form onSubmit={handleSubmit} className="auth-form">
           <div className="form-group">
             <label htmlFor="name" className='loginLabel'>Full Name</label>
@@ -49,7 +49,7 @@ const Register = () => {
               required
             />
           </div>
-          
+
           <div className="form-group">
             <label htmlFor="email" className='loginLabel'>Email</label>
             <input
@@ -63,31 +63,31 @@ const Register = () => {
             />
           </div>
           <div className="form-group">
-  <label htmlFor="address" className='loginLabel'>Address</label>
-  <input
-    id="address"
-    name="address"
-    type="text"
-    placeholder="Enter your address"
-    value={form.address}
-    onChange={handleChange}
-    required
-  />
-</div>
+            <label htmlFor="address" className='loginLabel'>Address</label>
+            <input
+              id="address"
+              name="address"
+              type="text"
+              placeholder="Enter your address"
+              value={form.address}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-<div className="form-group">
-  <label htmlFor="mobile" className='loginLabel'>Mobile Number</label>
-  <input
-    id="mobile"
-    name="mobile"
-    type="tel"
-    placeholder="Enter your mobile number"
-    value={form.mobile}
-    onChange={handleChange}
-    required
-    pattern="[0-9]{10}"
-  />
-</div>
+          <div className="form-group">
+            <label htmlFor="mobile" className='loginLabel'>Mobile Number</label>
+            <input
+              id="mobile"
+              name="mobile"
+              type="tel"
+              placeholder="Enter your mobile number"
+              value={form.mobile}
+              onChange={handleChange}
+              required
+              pattern="[0-9]{10}"
+            />
+          </div>
           <div className="form-group">
             <label htmlFor="password" className='loginLabel'>Password</label>
             <input
@@ -101,12 +101,12 @@ const Register = () => {
               minLength="6"
             />
           </div>
-          
+
           <button type="submit" className="auth-button" disabled={loading}>
             {loading ? 'Registering...' : 'Register'}
           </button>
         </form>
-        
+
         <div className="auth-footer">
           Already have an account? <a href="/login">Login here</a>
         </div>

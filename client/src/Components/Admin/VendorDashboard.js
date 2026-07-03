@@ -27,10 +27,10 @@ const VendorDashboard = () => {
   const fetchVenues = async () => {
     try {
       const [venuesRes, categoriesRes] = await Promise.all([
-        axios.get(`http://localhost:5000/vendor/venues/${vendorId}`),
-        axios.get('http://localhost:5000/categories')
+        axios.get(`http://https://festpro-yvwm.onrender.com/vendor/venues/${vendorId}`),
+        axios.get('http://https://festpro-yvwm.onrender.com/categories')
       ]);
-      
+
       const categoryMap = {};
       categoriesRes.data.forEach(cat => {
         categoryMap[cat.id] = cat.name;
@@ -39,11 +39,11 @@ const VendorDashboard = () => {
       const venuesWithCategoryNames = venuesRes.data.map(venue => {
         const categoryNames = venue.categories
           ? venue.categories.map(id => ({
-              id: id,
-              name: categoryMap[id] || 'Unknown'
-            }))
+            id: id,
+            name: categoryMap[id] || 'Unknown'
+          }))
           : [];
-        
+
         return {
           ...venue,
           categoryNames
@@ -59,7 +59,7 @@ const VendorDashboard = () => {
 
   const fetchCategories = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/categories');
+      const res = await axios.get('http://https://festpro-yvwm.onrender.com/categories');
       setCategories(res.data);
     } catch (error) {
       console.error('Error fetching categories:', error);
@@ -68,7 +68,7 @@ const VendorDashboard = () => {
 
   const fetchBookings = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/vendors/${vendorId}/bookings`);
+      const res = await axios.get(`http://https://festpro-yvwm.onrender.com/api/vendors/${vendorId}/bookings`);
       setBookings(res.data);
     } catch (err) {
       console.error("Error fetching bookings:", err);
@@ -91,7 +91,7 @@ const VendorDashboard = () => {
   return (
     <div className="vendor-dashboard">
       <Sidebar />
-      
+
       <main className="main-content">
         <header className="header">
           <h1 className="page-title">Venue Management</h1>
@@ -103,7 +103,7 @@ const VendorDashboard = () => {
           </div>
         </header>
 
-        <VenueForm 
+        <VenueForm
           editingId={editingId}
           currentVenue={currentVenue}
           isFormVisible={isFormVisible}
@@ -114,7 +114,7 @@ const VendorDashboard = () => {
           setCurrentVenue={setCurrentVenue}
         />
 
-        <VenuesList 
+        <VenuesList
           venues={venues}
           handleEdit={handleEdit}
           fetchVenues={fetchVenues}

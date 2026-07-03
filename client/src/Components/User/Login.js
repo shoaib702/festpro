@@ -18,15 +18,15 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:5000/login', form);
+      const res = await axios.post('http://https://festpro-yvwm.onrender.com/login', form);
 
       const { token, message, id } = res.data;
 
       localStorage.setItem('token', token);
       localStorage.setItem('user', id);
-  
+
       navigate('/explore');
-     
+
     } catch (err) {
       setError(err.response?.data?.message || "Invalid login credentials");
     } finally {
@@ -39,7 +39,7 @@ const Login = () => {
       <div className="auth-card">
         <h2 className="auth-title">Login</h2>
         {error && <div className="auth-error">{error}</div>}
-        
+
         <form onSubmit={handleSubmit} className="auth-form">
           <div className="form-group">
             <label htmlFor="email" className='loginLabel'>Email</label>
@@ -53,7 +53,7 @@ const Login = () => {
               required
             />
           </div>
-          
+
           <div className="form-group">
             <label htmlFor="password" className='loginLabel'>Password</label>
             <input
@@ -66,18 +66,18 @@ const Login = () => {
               required
             />
           </div>
-          
+
           <button type="submit" className="auth-button" disabled={loading}>
             {loading ? 'Logging in...' : 'Login'}
           </button>
         </form>
-        
+
         <div className="auth-footer">
           Don't have an account? <a href="/register">Register here</a>
         </div>
-        
-        <button 
-          onClick={() => navigate('/')} 
+
+        <button
+          onClick={() => navigate('/')}
           className="back-button"
         >
           ← Back to Home

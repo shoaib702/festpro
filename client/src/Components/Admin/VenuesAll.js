@@ -17,8 +17,8 @@ const VenuesAll = () => {
   const fetchVenues = async () => {
     try {
       const [venuesRes, categoriesRes] = await Promise.all([
-        axios.get(`http://localhost:5000/vendor/venues/${vendorId}`),
-        axios.get("http://localhost:5000/categories"),
+        axios.get(`http://https://festpro-yvwm.onrender.com/vendor/venues/${vendorId}`),
+        axios.get("http://https://festpro-yvwm.onrender.com/categories"),
       ]);
 
       const categoryMap = {};
@@ -29,9 +29,9 @@ const VenuesAll = () => {
       const venuesWithCategoryNames = venuesRes.data.map((venue) => {
         const categoryNames = venue.categories
           ? venue.categories.map((id) => ({
-              id: id,
-              name: categoryMap[id] || "Unknown",
-            }))
+            id: id,
+            name: categoryMap[id] || "Unknown",
+          }))
           : [];
 
         return {
@@ -82,7 +82,7 @@ const VenuesAll = () => {
                     {venue.photo && (
                       <div className="venue-image">
                         <img
-                          src={`http://localhost:5000/uploads/${venue.photo}`}
+                          src={`http://https://festpro-yvwm.onrender.com/uploads/${venue.photo}`}
                           alt={venue.name}
                         />
                       </div>

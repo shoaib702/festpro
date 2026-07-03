@@ -17,7 +17,7 @@ const VenuesList = ({ venues, handleEdit, fetchVenues }) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.delete(`http://localhost:5000/vendor/venue/${id}`, {
+          await axios.delete(`http://https://festpro-yvwm.onrender.com/vendor/venue/${id}`, {
             data: { vendor_id: vendorId },
           });
           fetchVenues();
@@ -55,7 +55,7 @@ const VenuesList = ({ venues, handleEdit, fetchVenues }) => {
                 {venue.photo && (
                   <div className="venue-image">
                     <img
-                      src={`http://localhost:5000/uploads/${venue.photo}`}
+                      src={`http://https://festpro-yvwm.onrender.com/uploads/${venue.photo}`}
                       alt={venue.name}
                     />
                   </div>
@@ -72,13 +72,13 @@ const VenuesList = ({ venues, handleEdit, fetchVenues }) => {
                   <p className="venue-capacity">Capacity: {venue.capacity} people</p>
                   <p className="venue-description">{venue.info}</p>
                   <div className="venue-actions">
-                    <button 
+                    <button
                       onClick={() => handleEdit(venue)}
                       className="btn btn-sm btn-primary"
                     >
                       Edit
                     </button>
-                    <button 
+                    <button
                       onClick={() => handleDelete(venue.id)}
                       className="btn btn-sm btn-danger"
                     >

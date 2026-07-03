@@ -22,9 +22,9 @@ const MyBookings = () => {
 
     const fetchBookings = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/bookings/user/${userId}`);
+        const res = await axios.get(`http://https://festpro-yvwm.onrender.com/api/bookings/user/${userId}`);
         setBookings(res.data);
-        
+
         if (res.data.length === 0) {
           Swal.fire({
             title: 'No Bookings Found',
@@ -59,8 +59,8 @@ const MyBookings = () => {
     const sorted = [...bookings].sort((a, b) => {
       const dateA = new Date(a.created_at || a.booking_date); // Use created_at if available, fallback to booking_date
       const dateB = new Date(b.created_at || b.booking_date);
-      
-      return sortOrder === 'latest' ? 
+
+      return sortOrder === 'latest' ?
         dateB - dateA : // Newest bookings first
         dateA - dateB;  // Oldest bookings first
     });
@@ -72,9 +72,9 @@ const MyBookings = () => {
   };
 
   const formatDate = (dateString) => {
-    const options = { 
-      year: 'numeric', 
-      month: 'short', 
+    const options = {
+      year: 'numeric',
+      month: 'short',
       day: 'numeric',
       hour: '2-digit',
       minute: '2-digit'
@@ -101,7 +101,7 @@ const MyBookings = () => {
         <div className="bookings-header">
           <h2 className="my-bookings-title">My Bookings</h2>
           {bookings.length > 0 && (
-            <button 
+            <button
               onClick={toggleSortOrder}
               className="sort-button"
             >
@@ -109,13 +109,13 @@ const MyBookings = () => {
             </button>
           )}
         </div>
-        
+
         {sortedBookings.length > 0 ? (
           sortedBookings.map((booking) => (
             <div key={booking.id} className="booking-card">
               {booking.venue_photo && (
                 <img
-                  src={`http://localhost:5000/uploads/${booking.venue_photo}`}
+                  src={`http://https://festpro-yvwm.onrender.com/uploads/${booking.venue_photo}`}
                   alt="Venue"
                   className="booking-image"
                 />
@@ -123,11 +123,11 @@ const MyBookings = () => {
               <div className="booking-details">
                 <p><strong>Venue:</strong> {booking.venue_name}</p>
                 <p><strong>Event Date:</strong> {new Date(booking.booking_date).toLocaleDateString()}</p>
-               
+
                 <p><strong>Booked On:</strong> {formatDate(booking.created_at || booking.booking_date)}</p>
                 <p><strong>Time:</strong> {booking.booking_time}</p>
                 <p><strong>Location:</strong> {booking.venue_location}</p>
-                <p><strong>Status:</strong> 
+                <p><strong>Status:</strong>
                   <span className={`status-badge ${booking.status || 'confirmed'}`}>
                     {booking.status || 'confirmed'}
                   </span>
@@ -139,7 +139,7 @@ const MyBookings = () => {
           <div className="no-bookings">
             <img src="/images/no-bookings.svg" alt="No bookings" />
             <h3>You don't have any bookings yet</h3>
-            <button 
+            <button
               className="explore-btn"
               onClick={() => navigate('/explore')}
             >

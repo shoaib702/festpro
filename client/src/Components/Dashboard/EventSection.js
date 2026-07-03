@@ -8,7 +8,7 @@ const EventSection = () => {
   useEffect(() => {
     const fetchVenues = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/venues');
+        const res = await fetch('http://https://festpro-yvwm.onrender.com/api/venues');
         const data = await res.json();
         setUpcomingEvents(data);
       } catch (err) {
@@ -17,8 +17,8 @@ const EventSection = () => {
     };
     fetchVenues();
   }, []);
-  
-  
+
+
 
   const trendingEvents = [
     {
@@ -43,7 +43,7 @@ const EventSection = () => {
 
   return (
     <>
-    {/* <input
+      {/* <input
   type="text"
   id="eventSearch"
   placeholder="Search events..."
@@ -63,7 +63,7 @@ const EventSection = () => {
         </div>
       </div>
 
-     
+
     </>
   );
 };

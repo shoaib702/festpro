@@ -16,7 +16,7 @@ const Header = () => {
         return;
       }
       try {
-        const res = await fetch(`http://localhost:5000/api/users/${userId}`);
+        const res = await fetch(`http://https://festpro-yvwm.onrender.com/api/users/${userId}`);
         if (res.ok) {
           const data = await res.json();
           setUser(data);
@@ -41,15 +41,15 @@ const Header = () => {
   return (
     <div className='imageContainer'>
       <div className="top-nav">
-        <div className="logo"><a style={{textDecoration: "none", color: "white"}} href='/explore'>Eventify</a></div>
+        <div className="logo"><a style={{ textDecoration: "none", color: "white" }} href='/explore'>Eventify</a></div>
 
         <div className="search-bar">
-        <input
-    type="text"
-    id="eventSearch"
-    placeholder="Search events..."
-    className="search-input"
-  />
+          <input
+            type="text"
+            id="eventSearch"
+            placeholder="Search events..."
+            className="search-input"
+          />
         </div>
 
         <div className="icons">

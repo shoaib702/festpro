@@ -37,8 +37,8 @@ const Payment = () => {
 
   // const venueRate = booking?.amount || event?.rate || 0;
   // const grandTotal = venueRate;
-const venueRate = Number(booking?.amount || event?.rate || 0);
-const grandTotal = Number(venueRate);
+  const venueRate = Number(booking?.amount || event?.rate || 0);
+  const grandTotal = Number(venueRate);
   const handleChange = (e) => {
     let { name, value } = e.target;
 
@@ -122,7 +122,7 @@ const grandTotal = Number(venueRate);
         userId,
       });
 
-      const res = await axios.post('http://localhost:5000/api/payments', {
+      const res = await axios.post('http://https://festpro-yvwm.onrender.com/api/payments', {
         bookingId,
         amount: grandTotal,
         paymentDetails,
@@ -134,13 +134,13 @@ const grandTotal = Number(venueRate);
       });
 
       const paymentDate = new Date();
-    const formattedPaymentDate = paymentDate.toLocaleDateString('en-IN', {
-      day: '2-digit',
-      month: 'short',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
+      const formattedPaymentDate = paymentDate.toLocaleDateString('en-IN', {
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
 
 
       console.log('Payment response:', res.data);
@@ -191,8 +191,8 @@ const grandTotal = Number(venueRate);
         html: `
           <div>
             <p>${errorMessage}</p>
-            ${err.response?.data?.sqlError ? 
-              `<p class="error-detail">Technical details: ${err.response.data.sqlError}</p>` : ''}
+            ${err.response?.data?.sqlError ?
+            `<p class="error-detail">Technical details: ${err.response.data.sqlError}</p>` : ''}
           </div>
         `,
         icon: 'error',

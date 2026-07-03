@@ -3,12 +3,12 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 
-const VenueForm = ({ 
-  editingId, 
+const VenueForm = ({
+  editingId,
   currentVenue,
-  isFormVisible, 
-  setIsFormVisible, 
-  categories, 
+  isFormVisible,
+  setIsFormVisible,
+  categories,
   setEditingId,
   fetchVenues,
   setCurrentVenue
@@ -40,7 +40,7 @@ const VenueForm = ({
         additionalPhotos: []
       });
       setSelectedCategories(currentVenue.categories || []);
-      
+
       // Fetch existing additional photos
       if (currentVenue.id) {
         fetchAdditionalPhotos(currentVenue.id);
@@ -51,7 +51,7 @@ const VenueForm = ({
   const fetchAdditionalPhotos = async (venueId) => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/venue/${venueId}/additional-photos`
+        `http://https://festpro-yvwm.onrender.com/venue/${venueId}/additional-photos`
       );
       setExistingAdditionalPhotos(response.data);
     } catch (err) {
@@ -109,38 +109,38 @@ const VenueForm = ({
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     const formData = new FormData();
     formData.append("vendor_id", vendorId);
     formData.append("name", form.name);
     formData.append("info", form.info);
     formData.append("rate", form.rate);
-    formData.append("capacity", form.capacity); 
+    formData.append("capacity", form.capacity);
     formData.append("location", form.location);
-    
+
     if (form.photo) {
       formData.append("photo", form.photo);
     }
-    
+
     selectedCategories.forEach(categoryId => {
       formData.append("categories[]", categoryId);
     });
-  
+
     try {
       let venueId;
-      
+
       if (editingId) {
         // Update existing venue
         venueId = editingId;
         await axios.put(
-          `http://localhost:5000/vendor/venue/${editingId}`,
+          `http://https://festpro-yvwm.onrender.com/vendor/venue/${editingId}`,
           formData,
           { headers: { 'Content-Type': 'multipart/form-data' } }
         );
       } else {
         // Create new venue
         const response = await axios.post(
-          "http://localhost:5000/vendor/venue",
+          "http://https://festpro-yvwm.onrender.com/vendor/venue",
           formData,
           { headers: { 'Content-Type': 'multipart/form-data' } }
         );
@@ -152,8 +152,8 @@ const VenueForm = ({
         // Delete photos marked for removal
         if (photosToDelete.length > 0) {
           await Promise.all(
-            photosToDelete.map(photoId => 
-              axios.delete(`http://localhost:5000/venue/additional-photo/${photoId}`, {
+            photosToDelete.map(photoId =>
+              axios.delete(`http://https://festpro-yvwm.onrender.com/venue/additional-photo/${photoId}`, {
                 data: { vendor_id: vendorId }
               })
             )
@@ -169,7 +169,7 @@ const VenueForm = ({
           additionalPhotosData.append("vendor_id", vendorId);
 
           await axios.post(
-            `http://localhost:5000/venue/${venueId}/additional-photos`,
+            `http://https://festpro-yvwm.onrender.com/venue/${venueId}/additional-photos`,
             additionalPhotosData,
             { headers: { 'Content-Type': 'multipart/form-data' } }
           );
@@ -177,7 +177,7 @@ const VenueForm = ({
       }
 
       showSuccessAlert(editingId ? "Venue updated successfully!" : "Venue added successfully!");
-      
+
       // Reset form
       setForm({
         name: "",
@@ -197,9 +197,9 @@ const VenueForm = ({
       fetchVenues();
     } catch (err) {
       console.error("Submission Error:", err);
-      const errorMessage = err.response?.data?.error || 
-                          err.message || 
-                          "Something went wrong while submitting the venue.";
+      const errorMessage = err.response?.data?.error ||
+        err.message ||
+        "Something went wrong while submitting the venue.";
       showErrorAlert(errorMessage);
     } finally {
       setIsSubmitting(false);
@@ -227,14 +227,14 @@ const VenueForm = ({
     <div className="card mb-4 compact-form">
       <div className="card-header">
         <h2 className="card-title">{editingId ? "Edit Venue" : "Add New Venue"}</h2>
-        <button 
-          className="btn btn-sm btn-primary" 
+        <button
+          className="btn btn-sm btn-primary"
           onClick={() => setIsFormVisible(!isFormVisible)}
         >
           {isFormVisible ? "▲ Hide Form" : "▼ Show Form"}
         </button>
       </div>
-      
+
       {isFormVisible && (
         <div className="card-body">
           <form onSubmit={handleSubmit} encType="multipart/form-data" className="compact-form">
@@ -250,7 +250,7 @@ const VenueForm = ({
                   required
                 />
               </div>
-              
+
               <div className="form-group compact-group">
                 <label htmlFor="rate" className="form-label">Rate (₹) *</label>
                 <input
@@ -265,7 +265,7 @@ const VenueForm = ({
                 />
               </div>
             </div>
-            
+
             <div className="form-row">
               <div className="form-group compact-group">
                 <label htmlFor="location" className="form-label">Location *</label>
@@ -278,7 +278,7 @@ const VenueForm = ({
                   required
                 />
               </div>
-              
+
               <div className="form-group compact-group">
                 <label htmlFor="capacity" className="form-label">Capacity *</label>
                 <input
@@ -293,7 +293,7 @@ const VenueForm = ({
                 />
               </div>
             </div>
-            
+
             <div className="form-group compact-group">
               <label htmlFor="info" className="form-label">Description</label>
               <textarea
@@ -305,7 +305,7 @@ const VenueForm = ({
                 rows="3"
               />
             </div>
-            
+
             {/* Main photo upload */}
             <div className="form-group compact-group">
               <label htmlFor="photo" className="form-label">
@@ -323,9 +323,9 @@ const VenueForm = ({
               {currentVenue?.photo && !form.photo && (
                 <div className="current-photo-preview mt-2">
                   <p>Current Main Photo:</p>
-                  <img 
-                    src={`http://localhost:5000/uploads/${currentVenue.photo}`} 
-                    alt="Current venue" 
+                  <img
+                    src={`http://https://festpro-yvwm.onrender.com/uploads/${currentVenue.photo}`}
+                    alt="Current venue"
                     className="img-thumbnail current-photo"
                   />
                 </div>
@@ -333,9 +333,9 @@ const VenueForm = ({
               {form.photo && (
                 <div className="new-photo-preview mt-2">
                   <p>New Photo Preview:</p>
-                  <img 
-                    src={URL.createObjectURL(form.photo)} 
-                    alt="New venue preview" 
+                  <img
+                    src={URL.createObjectURL(form.photo)}
+                    alt="New venue preview"
                     className="img-thumbnail new-photo-preview-img"
                   />
                 </div>
@@ -359,7 +359,7 @@ const VenueForm = ({
               <small className="form-text text-muted">
                 You can select multiple images (max 10)
               </small>
-              
+
               {/* Preview of new additional photos */}
               {form.additionalPhotos.length > 0 && (
                 <div className="new-additional-photos mt-3">
@@ -367,9 +367,9 @@ const VenueForm = ({
                   <div className="photo-preview-grid">
                     {form.additionalPhotos.map((photo, index) => (
                       <div key={index} className="photo-preview-item">
-                        <img 
-                          src={URL.createObjectURL(photo)} 
-                          alt={`Preview ${index + 1}`} 
+                        <img
+                          src={URL.createObjectURL(photo)}
+                          alt={`Preview ${index + 1}`}
                           className="img-thumbnail photo-preview-img"
                         />
                       </div>
@@ -377,7 +377,7 @@ const VenueForm = ({
                   </div>
                 </div>
               )}
-              
+
               {/* Existing additional photos */}
               {existingAdditionalPhotos.length > 0 && (
                 <div className="existing-additional-photos mt-3">
@@ -385,12 +385,12 @@ const VenueForm = ({
                   <div className="photo-preview-grid">
                     {existingAdditionalPhotos.map((photo) => (
                       <div key={photo.id} className="photo-preview-item">
-                        <img 
-                          src={`http://localhost:5000/uploads/${photo.image_path}`} 
-                          alt="Venue" 
+                        <img
+                          src={`http://https://festpro-yvwm.onrender.com/uploads/${photo.image_path}`}
+                          alt="Venue"
                           className="img-thumbnail photo-preview-img"
                         />
-                        <button 
+                        <button
                           type="button"
                           className="btn btn-danger btn-sm delete-photo-btn"
                           onClick={() => handleDeleteAdditionalPhoto(photo.id)}
@@ -422,10 +422,10 @@ const VenueForm = ({
                 ))}
               </div>
             </div>
-            
+
             <div className="form-actions">
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 className="btn btn-primary btn-sm"
                 disabled={isSubmitting}
               >
@@ -441,8 +441,8 @@ const VenueForm = ({
                 )}
               </button>
               {editingId && (
-                <button 
-                  type="button" 
+                <button
+                  type="button"
                   className="btn btn-secondary btn-sm ms-2"
                   onClick={handleCancel}
                   disabled={isSubmitting}

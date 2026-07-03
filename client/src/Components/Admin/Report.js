@@ -25,7 +25,7 @@ const Report = () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `http://localhost:5000/api/vendors/${vendorId}/bookings-details`
+        `http://https://festpro-yvwm.onrender.com/api/vendors/${vendorId}/bookings-details`
       );
       setBookings(response.data.bookings);
       setFilteredBookings(response.data.bookings);
@@ -61,15 +61,15 @@ const Report = () => {
 
   const filterBookings = (term = '', from = '', to = '') => {
     let filtered = [...bookings];
-  
+
     // Apply search term filter
     if (term) {
-      filtered = filtered.filter(booking => 
+      filtered = filtered.filter(booking =>
         booking.venue_name.toLowerCase().includes(term) ||
         booking.user_name.toLowerCase().includes(term)
       );
     }
-  
+
     // Apply date range filter
     if (from) {
       const fromDate = new Date(from);
@@ -80,7 +80,7 @@ const Report = () => {
         return bookingDate >= fromDate;
       });
     }
-    
+
     if (to) {
       const toDate = new Date(to);
       toDate.setHours(23, 59, 59, 999); // Set to end of day
@@ -90,7 +90,7 @@ const Report = () => {
         return bookingDate <= toDate;
       });
     }
-  
+
     setFilteredBookings(filtered);
     calculateTotal(filtered);
   };
@@ -115,122 +115,122 @@ const Report = () => {
   };
 
   return (
-    <div className="vendor-dashboard"> 
-    <Sidebar/>
-    <main className="main-content">
-    <div className="report-container">
-       
-    <header className="header">
-          <h1 className="page-title">Report</h1>
-          <div className="user-menu">
-            <div className="user-avatar">V</div>
-            <button className="btn btn-sm btn-danger" onClick={handleLogout}>
-              Logout
-            </button>
+    <div className="vendor-dashboard">
+      <Sidebar />
+      <main className="main-content">
+        <div className="report-container">
+
+          <header className="header">
+            <h1 className="page-title">Report</h1>
+            <div className="user-menu">
+              <div className="user-avatar">V</div>
+              <button className="btn btn-sm btn-danger" onClick={handleLogout}>
+                Logout
+              </button>
+            </div>
+          </header>
+          {/* Filters Section */}
+          <div className="filters-section">
+            <div className="search-filter">
+              <input
+                type="text"
+                placeholder="Search by venue or customer name..."
+                value={searchTerm}
+                onChange={handleSearch}
+                className="search-input"
+              />
+            </div>
+
+            <div className="date-filters">
+              <div className="date-filter">
+                <label htmlFor="from">From:</label>
+                <input
+                  type="date"
+                  id="from"
+                  name="from"
+                  value={dateRange.from}
+                  onChange={handleDateChange}
+                  className="date-input"
+                />
+              </div>
+
+              <div className="date-filter">
+                <label htmlFor="to">To:</label>
+                <input
+                  type="date"
+                  id="to"
+                  name="to"
+                  value={dateRange.to}
+                  onChange={handleDateChange}
+                  className="date-input"
+                />
+              </div>
+            </div>
           </div>
-        </header>
-      {/* Filters Section */}
-      <div className="filters-section">
-        <div className="search-filter">
-          <input
-            type="text"
-            placeholder="Search by venue or customer name..."
-            value={searchTerm}
-            onChange={handleSearch}
-            className="search-input"
-          />
-        </div>
-        
-        <div className="date-filters">
-          <div className="date-filter">
-            <label htmlFor="from">From:</label>
-            <input
-              type="date"
-              id="from"
-              name="from"
-              value={dateRange.from}
-              onChange={handleDateChange}
-              className="date-input"
-            />
+
+          {/* Summary Cards */}
+          <div className="summary-cards">
+            <div className="summary-card">
+              <h3>Total Bookings</h3>
+              <p>{filteredBookings.length}</p>
+            </div>
+            <div className="summary-card">
+              <h3>Completed Payments</h3>
+              <p>{filteredBookings.filter(b => b.payment_status === 'completed').length}</p>
+            </div>
+            <div className="summary-card">
+              <h3>Pending Payments</h3>
+              <p>{filteredBookings.filter(b => b.payment_status !== 'completed').length}</p>
+            </div>
+            <div className="summary-card highlight">
+              <h3>Total Revenue</h3>
+              <p>{formatCurrency(totalAmount)}</p>
+            </div>
           </div>
-          
-          <div className="date-filter">
-            <label htmlFor="to">To:</label>
-            <input
-              type="date"
-              id="to"
-              name="to"
-              value={dateRange.to}
-              onChange={handleDateChange}
-              className="date-input"
-            />
-          </div>
-        </div>
-      </div>
-      
-      {/* Summary Cards */}
-      <div className="summary-cards">
-        <div className="summary-card">
-          <h3>Total Bookings</h3>
-          <p>{filteredBookings.length}</p>
-        </div>
-        <div className="summary-card">
-          <h3>Completed Payments</h3>
-          <p>{filteredBookings.filter(b => b.payment_status === 'completed').length}</p>
-        </div>
-        <div className="summary-card">
-          <h3>Pending Payments</h3>
-          <p>{filteredBookings.filter(b => b.payment_status !== 'completed').length}</p>
-        </div>
-        <div className="summary-card highlight">
-          <h3>Total Revenue</h3>
-          <p>{formatCurrency(totalAmount)}</p>
-        </div>
-      </div>
-      
-      {/* Bookings Table */}
-      {loading ? (
-        <div className="loading">Loading bookings...</div>
-      ) : (
-        <div className="bookings-table">
-          <table>
-            <thead>
-              <tr>
-                <th>Booking ID</th>
-                <th>Venue Name</th>
-                <th>Customer Name</th>
-                <th>Booking Date</th>
-                <th>Payment Status</th>
-                <th>Amount</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredBookings.length > 0 ? (
-                filteredBookings.map(booking => (
-                  <tr key={booking.id}>
-                    <td>{booking.id}</td>
-                    <td>{booking.venue_name}</td>
-                    <td>{booking.user_name}</td>
-                    <td>{formatDate(booking.booking_date)}</td>
-                    <td>
-                      <span className={`status-badge ${booking.payment_status === 'completed' ? 'completed' : 'pending'}`}>
-                        {booking.payment_status === 'completed' ? 'Paid' : 'Pending'}
-                      </span>
-                    </td>
-                    <td>{formatCurrency(booking.venue_rate)}</td>
+
+          {/* Bookings Table */}
+          {loading ? (
+            <div className="loading">Loading bookings...</div>
+          ) : (
+            <div className="bookings-table">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Booking ID</th>
+                    <th>Venue Name</th>
+                    <th>Customer Name</th>
+                    <th>Booking Date</th>
+                    <th>Payment Status</th>
+                    <th>Amount</th>
                   </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan="6" className="no-data">No bookings found</td>
-                </tr>
-              )}
-            </tbody>
-          </table>
+                </thead>
+                <tbody>
+                  {filteredBookings.length > 0 ? (
+                    filteredBookings.map(booking => (
+                      <tr key={booking.id}>
+                        <td>{booking.id}</td>
+                        <td>{booking.venue_name}</td>
+                        <td>{booking.user_name}</td>
+                        <td>{formatDate(booking.booking_date)}</td>
+                        <td>
+                          <span className={`status-badge ${booking.payment_status === 'completed' ? 'completed' : 'pending'}`}>
+                            {booking.payment_status === 'completed' ? 'Paid' : 'Pending'}
+                          </span>
+                        </td>
+                        <td>{formatCurrency(booking.venue_rate)}</td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="6" className="no-data">No bookings found</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          )}
         </div>
-      )}
-    </div>
-    </main>
+      </main>
     </div>
   );
 };

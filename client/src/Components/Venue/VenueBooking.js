@@ -36,7 +36,7 @@ const VenueBooking = () => {
 
     const fetchUser = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/users/${userId}`);
+        const res = await fetch(`http://https://festpro-yvwm.onrender.com/api/users/${userId}`);
         if (res.ok) {
           const data = await res.json();
           setUser(data);
@@ -67,11 +67,11 @@ const VenueBooking = () => {
     try {
       setLoading(true);
       setErrors(prev => ({ ...prev, date: '' }));
-      
+
       const res = await fetch(
-        `http://localhost:5000/api/venues/${state.event.id}/availability?date=${formData.date}`
+        `http://https://festpro-yvwm.onrender.com/api/venues/${state.event.id}/availability?date=${formData.date}`
       );
-      
+
       if (res.ok) {
         const data = await res.json();
         setIsAvailable(data.available);
@@ -93,12 +93,12 @@ const VenueBooking = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    
+
     // Special validation for people field
     if (name === 'people') {
       const peopleNum = parseInt(value) || 0;
       const capacity = state?.event?.capacity || Infinity;
-      
+
       if (peopleNum > capacity) {
         setErrors(prev => ({
           ...prev,
@@ -116,7 +116,7 @@ const VenueBooking = () => {
         }));
       }
     }
-    
+
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
@@ -148,101 +148,101 @@ const VenueBooking = () => {
     return isValid;
   };
 
-// In VenueBooking.js
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  
-  if (!validateForm()) {
-    return;
-  }
+  // In VenueBooking.js
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  try {
-    const bookingData = {
-      user_id: localStorage.getItem('user'),
-      venue_id: state.event.id,
-      booking_date: formData.date,
-      booking_time: formData.time,
-      people: formData.people,
-      message: formData.message,
-    };
+    if (!validateForm()) {
+      return;
+    }
 
-    const response = await fetch('http://localhost:5000/api/bookings', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(bookingData),
-    });
+    try {
+      const bookingData = {
+        user_id: localStorage.getItem('user'),
+        venue_id: state.event.id,
+        booking_date: formData.date,
+        booking_time: formData.time,
+        people: formData.people,
+        message: formData.message,
+      };
 
-    if (response.ok) {
-      const data = await response.json();
-      navigate('/payment', { 
-        state: { 
-          booking: {
-            ...formData,
-            amount: state.event.rate // Pass the venue rate as amount
-          },
-          bookingId: data.bookingId,
-          event: state.event
-        } 
+      const response = await fetch('http://https://festpro-yvwm.onrender.com/api/bookings', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(bookingData),
       });
-    } else {
-      const errorData = await response.json();
+
+      if (response.ok) {
+        const data = await response.json();
+        navigate('/payment', {
+          state: {
+            booking: {
+              ...formData,
+              amount: state.event.rate // Pass the venue rate as amount
+            },
+            bookingId: data.bookingId,
+            event: state.event
+          }
+        });
+      } else {
+        const errorData = await response.json();
+        setErrors(prev => ({
+          ...prev,
+          general: errorData.error || 'Booking failed. Please try again.'
+        }));
+      }
+    } catch (err) {
+      console.error('Booking error:', err);
       setErrors(prev => ({
         ...prev,
-        general: errorData.error || 'Booking failed. Please try again.'
+        general: 'Failed to create booking. Please try again.'
       }));
     }
-  } catch (err) {
-    console.error('Booking error:', err);
-    setErrors(prev => ({
-      ...prev,
-      general: 'Failed to create booking. Please try again.'
-    }));
-  }
-};
+  };
   return (
     <div className="venue-booking-page">
       <Header />
       <div className="booking-form-container">
         <h2>Book Your Spot for: <strong>{state?.event?.name || 'Event'}</strong></h2>
-        
+
         {errors.general && (
           <div className="error-message general-error">{errors.general}</div>
         )}
-        
+
         <form className="booking-form" onSubmit={handleSubmit}>
           <label>
             Name:
-            <input 
-              name="name" 
-              value={formData.name} 
-              onChange={handleChange} 
-              placeholder="Your Name" 
-              required 
+            <input
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              placeholder="Your Name"
+              required
             />
           </label>
 
           <label>
             Email:
-            <input 
-              name="email" 
-              value={formData.email} 
-              onChange={handleChange} 
-              placeholder="Your Email" 
-              required 
+            <input
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Your Email"
+              required
               type="email"
             />
           </label>
 
           <label>
             Mobile:
-            <input 
-              name="mobile" 
-              value={formData.mobile} 
-              onChange={handleChange} 
-              placeholder="Mobile Number" 
-              required 
+            <input
+              name="mobile"
+              value={formData.mobile}
+              onChange={handleChange}
+              placeholder="Mobile Number"
+              required
               pattern="[0-9]{10}"
               title="10 digit mobile number"
             />
@@ -250,24 +250,24 @@ const handleSubmit = async (e) => {
 
           <label>
             Address:
-            <input 
-              name="address" 
-              value={formData.address} 
-              onChange={handleChange} 
-              placeholder="Address" 
-              required 
+            <input
+              name="address"
+              value={formData.address}
+              onChange={handleChange}
+              placeholder="Address"
+              required
             />
           </label>
 
           <label>
             Event Date:
-            <input 
-              name="date" 
-              value={formData.date} 
-              onChange={handleChange} 
-              type="date" 
-              min={new Date().toISOString().split('T')[0]} 
-              required 
+            <input
+              name="date"
+              value={formData.date}
+              onChange={handleChange}
+              type="date"
+              min={new Date().toISOString().split('T')[0]}
+              required
             />
             {formData.date && (
               <div className="availability-status">
@@ -284,26 +284,26 @@ const handleSubmit = async (e) => {
 
           <label>
             Time:
-            <input 
-              name="time" 
-              value={formData.time} 
-              onChange={handleChange} 
-              type="time" 
-              required 
+            <input
+              name="time"
+              value={formData.time}
+              onChange={handleChange}
+              type="time"
+              required
             />
           </label>
 
           <label>
             No. of People:
-            <input 
-              name="people" 
-              value={formData.people} 
-              onChange={handleChange} 
-              type="number" 
-              min="1" 
+            <input
+              name="people"
+              value={formData.people}
+              onChange={handleChange}
+              type="number"
+              min="1"
               max={state?.event?.capacity || ''}
-              placeholder="No. of People" 
-              required 
+              placeholder="No. of People"
+              required
             />
             {errors.people && (
               <div className="error-message">{errors.people}</div>
@@ -317,16 +317,16 @@ const handleSubmit = async (e) => {
 
           <label>
             Message:
-            <textarea 
-              name="message" 
-              value={formData.message} 
-              onChange={handleChange} 
-              placeholder="Any message (optional)" 
+            <textarea
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+              placeholder="Any message (optional)"
             />
           </label>
 
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             className="modern-book-button"
             disabled={loading || !isAvailable}
           >

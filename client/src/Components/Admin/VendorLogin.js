@@ -19,7 +19,7 @@ const VendorLogin = () => {
     setLoading(true);
 
     try {
-      const res = await axios.post('http://localhost:5000/vendor/login', form);
+      const res = await axios.post('http://https://festpro-yvwm.onrender.com/vendor/login', form);
       const { token, message, vendorId } = res.data;
 
       localStorage.setItem('vendorToken', token);
@@ -73,8 +73,8 @@ const VendorLogin = () => {
         <div className="auth-footer">
           Don't have an account? <a href="/vendorRegister">Register</a>
         </div>
-        <button 
-          onClick={() => navigate('/')} 
+        <button
+          onClick={() => navigate('/')}
           className="back-button"
         >
           ← Back to Home

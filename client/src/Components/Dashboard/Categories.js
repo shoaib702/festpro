@@ -11,7 +11,7 @@ const Categories = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/categories');
+        const response = await axios.get('http://https://festpro-yvwm.onrender.com/categories');
         setCategories(response.data);
         setLoading(false);
       } catch (err) {
@@ -26,7 +26,7 @@ const Categories = () => {
   const handleCategoryClick = (categoryId) => {
     navigate('/venues', { state: { categoryId } });
   };
-  
+
 
   const getCategoryIcon = (name) => {
     switch (name.toLowerCase()) {
@@ -47,9 +47,9 @@ const Categories = () => {
       case 'sports':
         return '⚽';
       case 'engagement':
-        return '💑'; 
+        return '💑';
       default:
-        return '🎭'; 
+        return '🎭';
     }
   };
   if (loading) return <div className="loading-spinner">Loading categories...</div>;
@@ -62,8 +62,8 @@ const Categories = () => {
       </div>
       <div className="categories">
         {categories.map((category) => (
-          <div 
-            key={category.id} 
+          <div
+            key={category.id}
             className="category-item"
             onClick={() => handleCategoryClick(category.id)}
             style={{ cursor: 'pointer' }}
@@ -71,17 +71,17 @@ const Categories = () => {
             <div className="category-icon">
               {getCategoryIcon(category.name)}
             </div>
-            
+
             <div className="category-name category-badge">{category.name}</div>
           </div>
 
         ))}
         <div className="category-item" >
-         <div className="category-icon">🎭 </div>
+          <div className="category-icon">🎭 </div>
 
-          <div className="category-name category-badge"><a style={{textDecoration:"none", color:"#ffffff"}} href='/explore'>All categories</a></div></div>
+          <div className="category-name category-badge"><a style={{ textDecoration: "none", color: "#ffffff" }} href='/explore'>All categories</a></div></div>
       </div>
-      
+
     </div>
   );
 };

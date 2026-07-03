@@ -25,7 +25,7 @@ const VendorRegister = () => {
     setLoading(true);
     try {
       const res = await axios.post(
-        "http://localhost:5000/vendor/register",
+        "http://https://festpro-yvwm.onrender.com/vendor/register",
         form
       );
       alert(res.data.message);
@@ -93,7 +93,7 @@ const VendorRegister = () => {
             <input
               name="mobile"
               type="tel"
-               placeholder="Enter your mobile no."
+              placeholder="Enter your mobile no."
               pattern="[0-9]{10}"
               onChange={handleChange}
               value={form.mobile}

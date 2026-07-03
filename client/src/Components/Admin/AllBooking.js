@@ -20,7 +20,7 @@ const AllBookings = () => {
     try {
       setLoading(true);
       const res = await axios.get(
-        `http://localhost:5000/api/vendors/${vendorId}/bookings-details`
+        `https://festpro-yvwm.onrender.com/api/vendors/${vendorId}/bookings-details`
       );
       
       // Format booking data with payment info

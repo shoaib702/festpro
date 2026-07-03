@@ -16,7 +16,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchVenues = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/venues');
+        const response = await fetch('http://https://festpro-yvwm.onrender.com/api/venues');
         const data = await response.json();
         setUpcomingEvents(data);
       } catch (error) {
@@ -31,10 +31,10 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
-      <Header/>
-      <Categories  />
-      <EventSection  />
-    
+      <Header />
+      <Categories />
+      <EventSection />
+
     </div>
   );
 };
