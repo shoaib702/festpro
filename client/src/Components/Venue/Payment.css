@@ -1,0 +1,224 @@
+
+.payment-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.booking-summary, .payment-details {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: 0 10px 25px rgba(130, 90, 199, 0.1);
+}
+
+.booking-summary h2, .payment-details h2 {
+  margin-bottom: 1.5rem;
+  color: #7138a7;
+  font-size: 1.5rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.5rem;
+}
+
+.event-details {
+  margin-bottom: 1.5rem;
+}
+
+.event-details h3 {
+  margin-bottom: 1rem;
+  color: #5c259f;
+  font-size: 1.2rem;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #f0e6f8;
+}
+
+.detail-label {
+  font-weight: 500;
+  color: #666;
+}
+
+.detail-value {
+  color: #3c3c3c;
+  font-weight: 500;
+}
+
+.price-breakdown {
+  border-top: 1px solid #e0d4f3;
+  padding-top: 1rem;
+  margin-top: 1rem;
+}
+
+.price-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem 0;
+}
+
+.price-item.total {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e0d4f3;
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #5c259f;
+}
+
+.payment-form {
+  margin-top: 1rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #555;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #d6cbed;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+  border-color: #b692e3;
+  outline: none;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.method-options {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.method-option {
+  flex: 1;
+  padding: 0.8rem;
+  background: #eee7f8;
+  border: 1px solid #d1bfe7;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+  text-align: center;
+}
+
+.method-option.active {
+  background: #d5bff2;
+  border-color: #b692e3;
+  color: white;
+}
+
+.pay-button {
+  width: 100%;
+  padding: 1rem;
+  background: #7a4bc0;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 1rem;
+}
+
+.pay-button:hover {
+  background: #6a3ab3;
+}
+
+.pay-button:disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+}
+
+.security-note {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.lock-icon {
+  font-size: 1.2rem;
+}
+
+/* Success popup styles */
+.success-popup .success-icon {
+  font-size: 4rem;
+  color: #4CAF50;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.success-popup h3 {
+  text-align: center;
+  color: #4CAF50;
+  margin-bottom: 1.5rem;
+}
+
+.receipt-details {
+  background: #f9f9f9;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-top: 1rem;
+}
+
+.receipt-details p {
+  margin-bottom: 0.5rem;
+}
+
+.price-details {
+  margin-top: 1rem;
+}
+
+.price-details p {
+  display: flex;
+  justify-content: space-between;
+}
+
+.price-details .total {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid #eee;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .payment-container {
+    grid-template-columns: 1fr;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .method-options {
+    flex-direction: column;
+  }
+}

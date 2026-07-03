@@ -1,0 +1,212 @@
+/* Modern Auth Styles */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                url('../../../public/images/slider5.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    padding: 20px;
+  }
+  
+  .auth-card {
+    background: rgb(255 255 255 / 14%);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    padding: 40px;
+    width: 100%;
+    max-width: 500px;
+    backdrop-filter: blur(5px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    animation: fadeIn 0.5s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .auth-title {
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 30px;
+    font-size: 2.2rem;
+    font-weight: 700;
+    position: relative;
+    padding-bottom: 15px;
+  }
+  
+  .auth-title:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(to right, #3498db, #9b59b6);
+    border-radius: 2px;
+  }
+  
+  .auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+  
+  .form-group {
+    position: relative;
+  }
+  
+  .form-group .loginLabel {
+    display: block;
+    margin-bottom: 8px;
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 0.95rem;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 15px 20px;
+    border: 2px solid #ecf0f1;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s;
+    background-color: #f8f9fa;
+  }
+  
+  .form-group input:focus {
+    border-color: #3498db;
+    background-color: white;
+    box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.1);
+    outline: none;
+  }
+  
+  .auth-button {
+    background: linear-gradient(to right, #3498db, #9b59b6);
+    color: white;
+    border: none;
+    padding: 16px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 15px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  
+  .auth-button:hover {
+    background: linear-gradient(to right, #2980b9, #8e44ad);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .auth-button:disabled {
+    background: #bdc3c7;
+    transform: none;
+    box-shadow: none;
+    cursor: not-allowed;
+  }
+  
+  .auth-error {
+    color: #e74c3c;
+    background-color: #fdecea;
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    text-align: center;
+    font-size: 0.9rem;
+    border-left: 4px solid #e74c3c;
+  }
+  
+  .auth-footer {
+    text-align: center;
+    margin-top: 30px;
+    color: #ffffff;
+    font-size: 0.95rem;
+  }
+  
+  .auth-footer a {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s;
+  }
+  
+  .auth-footer a:hover {
+    color: #2980b9;
+    text-decoration: underline;
+  }
+  
+  .social-login {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  .social-btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+    transition: all 0.3s;
+  }
+  
+  .social-btn:hover {
+    transform: translateY(-3px);
+  }
+  
+  .social-btn.google {
+    background: #dd4b39;
+  }
+  
+  .social-btn.facebook {
+    background: #3b5998;
+  }
+  
+  .social-btn.twitter {
+    background: #1da1f2;
+  }
+  
+  .password-strength {
+    margin-top: 5px;
+    height: 4px;
+    background: #ecf0f1;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  
+  .password-strength-bar {
+    height: 100%;
+    width: 0%;
+    transition: width 0.3s;
+    background: linear-gradient(to right, #e74c3c, #f39c12, #2ecc71);
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 576px) {
+    .auth-card {
+      padding: 30px 20px;
+      margin: 20px;
+    }
+    
+    .auth-title {
+      font-size: 1.8rem;
+    }
+    
+    .auth-button {
+      padding: 14px;
+    }
+  }
+  

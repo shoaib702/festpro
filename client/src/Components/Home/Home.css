@@ -1,0 +1,138 @@
+/* Base styles */
+.home-page {
+    overflow-x: hidden;
+  }
+  
+  /* Navbar styles */
+  .navbar-transparent {
+    background-color: rgba(0, 0, 0, 0.3);
+    transition: background-color 0.4s ease-in-out;
+    z-index: 1000;
+  }
+  
+  .navbar-scrolled {
+    background-color: #000 !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  .navbar-transparent .nav-link,
+  .navbar-transparent .navbar-brand {
+    color: #fff !important;
+    transition: color 0.3s ease;
+  }
+  
+  .navbar-transparent .nav-link:hover,
+  .navbar-transparent .navbar-brand:hover {
+    color: rgba(255, 255, 255, 0.8) !important;
+  }
+  
+  /* Carousel styles */
+  .carousel {
+    margin-top: -56px; /* Compensate for fixed navbar */
+  }
+  
+  .carousel-item {
+    height: 100vh;
+    min-height: 700px;
+  }
+  
+  .carousel-item img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+  }
+  
+  .carousel-caption {
+    bottom: 30%;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+  }
+  
+  /* Zoom effect */
+  .zoom-effect img {
+    transition: transform 8s ease;
+  }
+  
+  .carousel-item.active .zoom-effect img {
+    transform: scale(1.1);
+  }
+  
+  /* WhatsApp button */
+  .whatsapp-float {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+    transition: transform 0.3s ease;
+  }
+  
+  .whatsapp-float:hover {
+    transform: scale(1.1);
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .carousel-item {
+      height: 70vh;
+      min-height: 400px;
+    }
+    
+    .carousel-caption {
+      bottom: 20%;
+    }
+    
+    .carousel-caption h1 {
+      font-size: 1.8rem;
+    }
+    
+    .carousel-caption p {
+      font-size: 1rem;
+    }
+  }
+
+  /* Profile Dropdown Styles */
+.navbar .dropdown-menu {
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .navbar .dropdown-item {
+    color: #fff;
+    padding: 0.5rem 1.5rem;
+    transition: all 0.3s ease;
+  }
+  
+  .navbar .dropdown-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+  }
+  
+  .navbar .dropdown-divider {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Profile icon */
+  .bi-person-circle {
+    font-size: 1.2rem;
+    vertical-align: middle;
+  }
+  
+  /* Admin link styling */
+  .dropdown-item[href="#admin"],
+  .dropdown-item[href="#admin-login"] {
+    font-weight: bold;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 992px) {
+    .navbar .dropdown-menu {
+      background-color: rgba(0, 0, 0, 0.9);
+    }
+    
+    .navbar-nav .dropdown-menu {
+      position: static;
+      float: none;
+    }
+  }
+
+  
+  

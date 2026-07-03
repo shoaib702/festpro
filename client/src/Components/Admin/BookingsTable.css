@@ -1,0 +1,297 @@
+/* Main Container */
+.bookings-container {
+    padding: 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  
+  /* Cards Flex Container */
+  .cards-flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+  
+  /* Booking Card */
+  .booking-cards {
+    flex: 1 1 300px;
+    min-width: 300px;
+    max-width: calc(33.333% - 24px);
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+    border-left: 4px solid #8e44ad;
+  }
+  
+  .booking-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  }
+  
+  /* Card Header */
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .card-header h3 {
+    color: #2c3e50;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+  }
+  
+  /* Status Badge */
+  .status-badge {
+    background-color: #f39c12;
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  
+  .status-badge.completed {
+    background-color: #27ae60;
+  }
+  
+  /* Card Details */
+  .card-details {
+    margin-bottom: 16px;
+  }
+  
+  .detail-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    color: #34495e;
+  }
+  
+  .detail-icon {
+    margin-right: 8px;
+  }
+  
+  /* View Button */
+  .view-button {
+    width: 100%;
+    background-color: #8e44ad;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .view-button:hover {
+    background-color: #9b59b6;
+  }
+  
+  /* Small Button */
+  .small-button {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+  
+  /* Modal Styles */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+  }
+  
+  .modal-content {
+    background-color: #ffffff;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    position: relative;
+  }
+  
+  /* Modal Header */
+  .modal-header {
+    padding: 24px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    background-color: #ffffff;
+    z-index: 10;
+  }
+  
+  .modal-header h2 {
+    color: #2c3e50;
+    margin: 0;
+    font-size: 24px;
+  }
+  
+  .close-button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #7f8c8d;
+    cursor: pointer;
+    padding: 4px;
+  }
+  
+  .close-button:hover {
+    color: #e74c3c;
+  }
+  
+  /* Modal Body */
+  .modal-body {
+    padding: 24px;
+  }
+  
+  /* Section Styles */
+  .section {
+    margin-bottom: 24px;
+  }
+  
+  .section-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .section-icon {
+    margin-right: 12px;
+  }
+  
+  .section-title {
+    color: #8e44ad;
+    margin: 0;
+    font-size: 18px;
+  }
+  
+  /* Detail Flex Container */
+  .detail-flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  
+  .detail-flex-item {
+    flex: 1 1 45%;
+    min-width: 200px;
+  }
+  
+  .detail-label {
+    color: #7f8c8d;
+    margin-bottom: 4px;
+    font-size: 14px;
+  }
+  
+  .detail-value {
+    color: #2c3e50;
+    margin: 0;
+    font-weight: 500;
+  }
+  
+  /* Status Styles */
+  .status-tag {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 500;
+  }
+  
+  .status-confirmed {
+    background-color: #e3fcef;
+    color: #27ae60;
+  }
+  
+  .status-cancelled {
+    background-color: #ffebee;
+    color: #e74c3c;
+  }
+  
+  .status-pending {
+    background-color: #fff8e1;
+    color: #f39c12;
+  }
+  
+  /* Full-width items */
+  .full-width {
+    flex: 1 1 100%;
+  }
+  
+  .message-box {
+    color: #2c3e50;
+    margin: 0;
+    font-weight: 500;
+    padding: 12px;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+  }
+  
+  /* Modal Footer */
+  .modal-footer {
+    padding: 16px 24px;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .modal-close-button {
+    background-color: #8e44ad;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .modal-close-button:hover {
+    background-color: #9b59b6;
+  }
+  
+  /* No Bookings Message */
+  .no-bookings {
+    width: 100%;
+    text-align: center;
+    padding: 40px;
+    color: #666;
+    font-size: 18px;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .booking-card {
+      max-width: calc(50% - 24px);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .booking-card {
+      max-width: 100%;
+    }
+    
+    .detail-flex-item {
+      flex: 1 1 100%;
+    }
+  }
