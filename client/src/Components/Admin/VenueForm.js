@@ -2,6 +2,14 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 
+const defaultCategories = [
+  { id: "1", name: "Wedding" },
+  { id: "2", name: "Birthday" },
+  { id: "3", name: "Conference" },
+  { id: "4", name: "Corporate" },
+  { id: "5", name: "Cultural" },
+  { id: "6", name: "Outdoor" },
+];
 
 const VenueForm = ({
   editingId,
@@ -9,6 +17,8 @@ const VenueForm = ({
   isFormVisible,
   setIsFormVisible,
   categories,
+  categoriesLoading,
+  categoriesError,
   setEditingId,
   fetchVenues,
   setCurrentVenue
@@ -28,6 +38,23 @@ const VenueForm = ({
   const [photosToDelete, setPhotosToDelete] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const normalizedCategories = Array.isArray(categories)
+    ? categories
+      .map((category) => {
+        if (!category || typeof category !== "object") return null;
+
+        const id = category.id ?? category._id ?? category.categoryId ?? category.category_id ?? category.categoryID;
+        const name = category.name ?? category.title ?? category.label ?? category.categoryName ?? "Unnamed Category";
+
+        return id === undefined || id === null || id === ""
+          ? null
+          : { id: String(id), name: String(name) };
+      })
+      .filter(Boolean)
+    : [];
+
+  const categoriesToRender = normalizedCategories.length ? normalizedCategories : defaultCategories;
+
   useEffect(() => {
     if (currentVenue) {
       setForm({
@@ -39,7 +66,7 @@ const VenueForm = ({
         photo: null,
         additionalPhotos: []
       });
-      setSelectedCategories(currentVenue.categories || []);
+      setSelectedCategories((currentVenue.categories || []).map((categoryId) => String(categoryId)));
 
       // Fetch existing additional photos
       if (currentVenue.id) {
@@ -77,7 +104,7 @@ const VenueForm = ({
 
   const handleCategoryChange = (e) => {
     const { value, checked } = e.target;
-    const categoryId = parseInt(value);
+    const categoryId = String(value);
     setSelectedCategories((prev) =>
       checked ? [...prev, categoryId] : prev.filter((id) => id !== categoryId)
     );
@@ -110,6 +137,12 @@ const VenueForm = ({
     e.preventDefault();
     setIsSubmitting(true);
 
+    if (selectedCategories.length === 0) {
+      showErrorAlert("Please select at least one category for the venue.");
+      setIsSubmitting(false);
+      return;
+    }
+
     const formData = new FormData();
     formData.append("vendor_id", vendorId);
     formData.append("name", form.name);
@@ -122,7 +155,8 @@ const VenueForm = ({
       formData.append("photo", form.photo);
     }
 
-    selectedCategories.forEach(categoryId => {
+    formData.append("categories", JSON.stringify(selectedCategories));
+    selectedCategories.forEach((categoryId) => {
       formData.append("categories[]", categoryId);
     });
 
@@ -407,8 +441,13 @@ const VenueForm = ({
             {/* Categories */}
             <div className="form-group compact-group">
               <label className="form-label">Categories *</label>
+              {categoriesLoading && <div className="text-muted small">Loading categories...</div>}
+              {categoriesError && <div className="text-danger small">{categoriesError}</div>}
+              {!categoriesLoading && categoriesToRender.length === 0 && (
+                <div className="text-muted small">No categories are available right now.</div>
+              )}
               <div className="categories-grid">
-                {categories.map((cat) => (
+                {categoriesToRender.map((cat) => (
                   <div key={cat.id} className="category-checkbox">
                     <input
                       type="checkbox"
@@ -452,9 +491,9 @@ const VenueForm = ({
               )}
             </div>
           </form>
-        </div>
+        </div >
       )}
-    </div>
+    </div >
   );
 };
 

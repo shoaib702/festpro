@@ -6,9 +6,20 @@ import VenueForm from "./VenueForm";
 import VenuesList from "./VenuesList";
 
 
+const defaultCategories = [
+  { id: "1", name: "Wedding" },
+  { id: "2", name: "Birthday" },
+  { id: "3", name: "Conference" },
+  { id: "4", name: "Corporate" },
+  { id: "5", name: "Cultural" },
+  { id: "6", name: "Outdoor" },
+];
+
 const VendorDashboard = () => {
   const [venues, setVenues] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [categoriesLoading, setCategoriesLoading] = useState(true);
+  const [categoriesError, setCategoriesError] = useState(null);
   const [bookings, setBookings] = useState([]);
   const [editingId, setEditingId] = useState(null);
   const [isFormVisible, setIsFormVisible] = useState(false);
@@ -59,10 +70,17 @@ const VendorDashboard = () => {
 
   const fetchCategories = async () => {
     try {
+      setCategoriesLoading(true);
+      setCategoriesError(null);
       const res = await axios.get('https://festpro-yvwm.onrender.com/categories');
-      setCategories(res.data);
+      const fetchedCategories = Array.isArray(res.data) ? res.data : [];
+      setCategories(fetchedCategories.length ? fetchedCategories : defaultCategories);
     } catch (error) {
       console.error('Error fetching categories:', error);
+      setCategoriesError('Unable to load categories right now. Default categories are being used.');
+      setCategories(defaultCategories);
+    } finally {
+      setCategoriesLoading(false);
     }
   };
 
@@ -109,6 +127,8 @@ const VendorDashboard = () => {
           isFormVisible={isFormVisible}
           setIsFormVisible={setIsFormVisible}
           categories={categories}
+          categoriesLoading={categoriesLoading}
+          categoriesError={categoriesError}
           setEditingId={setEditingId}
           fetchVenues={fetchVenues}
           setCurrentVenue={setCurrentVenue}

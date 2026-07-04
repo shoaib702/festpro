@@ -55,6 +55,71 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
+const defaultCategories = [
+  { id: 1, name: "Wedding" },
+  { id: 2, name: "Birthday" },
+  { id: 3, name: "Conference" },
+  { id: 4, name: "Corporate" },
+  { id: 5, name: "Cultural" },
+  { id: 6, name: "Outdoor" },
+];
+
+const normalizeCategory = (category) => {
+  if (!category || typeof category !== "object") return null;
+
+  const id = category.id ?? category._id ?? category.categoryId ?? category.category_id ?? category.categoryID;
+  const name = category.name ?? category.title ?? category.label ?? category.categoryName ?? "Unnamed Category";
+
+  if (id === undefined || id === null || id === "") {
+    return null;
+  }
+
+  return {
+    id: String(id),
+    name: String(name),
+  };
+};
+
+const normalizeCategories = (rows = []) => {
+  return rows
+    .map((row) => normalizeCategory(row))
+    .filter(Boolean);
+};
+
+const ensureCategoriesSeeded = (callback) => {
+  db.query(
+    `CREATE TABLE IF NOT EXISTS categories (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      name VARCHAR(100) NOT NULL
+    )`,
+    (tableErr) => {
+      if (tableErr) {
+        return callback(tableErr);
+      }
+
+      db.query("SELECT * FROM categories ORDER BY id", (selectErr, rows) => {
+        if (selectErr) {
+          return callback(selectErr);
+        }
+
+        const existingCategories = normalizeCategories(rows || []);
+        if (existingCategories.length > 0) {
+          return callback(null, existingCategories);
+        }
+
+        const values = defaultCategories.map((category) => [category.name]);
+        db.query("INSERT INTO categories (name) VALUES ?", [values], (insertErr) => {
+          if (insertErr) {
+            return callback(insertErr);
+          }
+
+          callback(null, defaultCategories.map((category) => ({ id: String(category.id), name: category.name })));
+        });
+      });
+    }
+  );
+};
+
 // ---------------- AUTH ----------------
 
 // User Register
@@ -167,7 +232,23 @@ app.post("/vendor/venue", upload.single("photo"), (req, res) => {
   const { vendor_id, name, info, rate, capacity, location } = req.body;
   const photo = req.file ? req.file.filename : null;
 
-  const categories = Array.isArray(req.body.categories) ? req.body.categories : [];
+  const rawCategories = req.body.categories;
+  let categories = [];
+
+  if (Array.isArray(rawCategories)) {
+    categories = rawCategories;
+  } else if (typeof rawCategories === "string") {
+    try {
+      const parsedCategories = JSON.parse(rawCategories);
+      categories = Array.isArray(parsedCategories) ? parsedCategories : [parsedCategories];
+    } catch (error) {
+      categories = rawCategories
+        .split(",")
+        .map((value) => value.trim())
+        .filter(Boolean);
+    }
+  }
+
   const categoriesString = categories.join(',');
 
   const sql = `
@@ -195,7 +276,23 @@ app.put("/vendor/venue/:id", upload.single("photo"), (req, res) => {
   const { vendor_id, name, info, rate, capacity, location } = req.body;
   const photo = req.file ? req.file.filename : null;
 
-  const categories = Array.isArray(req.body.categories) ? req.body.categories : [];
+  const rawCategories = req.body.categories;
+  let categories = [];
+
+  if (Array.isArray(rawCategories)) {
+    categories = rawCategories;
+  } else if (typeof rawCategories === "string") {
+    try {
+      const parsedCategories = JSON.parse(rawCategories);
+      categories = Array.isArray(parsedCategories) ? parsedCategories : [parsedCategories];
+    } catch (error) {
+      categories = rawCategories
+        .split(",")
+        .map((value) => value.trim())
+        .filter(Boolean);
+    }
+  }
+
   const categoriesString = categories.join(',');
 
   db.query(
@@ -347,10 +444,13 @@ app.delete("/vendor/venue/:id", (req, res) => {
 
 // Get all categories
 app.get("/categories", (req, res) => {
-  const sql = "SELECT * FROM categories";
-  db.query(sql, (err, result) => {
-    if (err) return res.status(500).json({ error: err });
-    res.json(result);
+  ensureCategoriesSeeded((err, categories) => {
+    if (err) {
+      console.error("Error loading categories:", err);
+      return res.status(500).json(defaultCategories.map((category) => ({ id: String(category.id), name: category.name })));
+    }
+
+    res.json(categories);
   });
 });
 
